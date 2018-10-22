@@ -60,6 +60,7 @@ class PlaySoundsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAudio()
+        configureUI()
     }
     
     // MARK: - View Will Apprear
@@ -67,4 +68,29 @@ class PlaySoundsViewController: UIViewController {
         super.viewWillAppear(animated)
         configureUI(.notPlaying)
     }
+    
+    // MARK: - View Will Disappear
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopAudio()
+    }
+}
+
+extension PlaySoundsViewController {
+    
+    // MARK: - Configure UI
+    func configureUI() {
+        
+        setContentMode(mode: .scaleAspectFit, imageView: [
+            snailButton.imageView,
+            chipmunkButton.imageView,
+            rabbitButton.imageView,
+            vaderButton.imageView,
+            echoButton.imageView,
+            reverbButton.imageView,
+            stopButton.imageView
+            ])
+        
+    }
+    
 }

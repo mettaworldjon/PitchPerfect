@@ -17,6 +17,9 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var stopRecording: UIButton!
     @IBOutlet weak var recordingLabel: UILabel!
     
+    // MARK: - Segue Identifier
+    let stopRecordingID = "stopRecording"
+    
     // MARK: - Audio Recorder
     var audioRecorder:AVAudioRecorder!
     var correctPermission:Bool = false
@@ -68,7 +71,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     // MARK: - Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "stopRecording" {
+        if segue.identifier == stopRecordingID {
             let playSoundsVC = segue.destination as! PlaySoundsViewController
             let recordedAudioURL = sender as! URL
             playSoundsVC.recordedAudioURL = recordedAudioURL
@@ -78,7 +81,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     // MARK: - Audio Recorder Delegate
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
-            performSegue(withIdentifier: "stopRecording", sender: audioRecorder.url)
+            performSegue(withIdentifier: stopRecordingID, sender: audioRecorder.url)
         } else {
             print("It didn't turn out how you thought buddy...")
         }
